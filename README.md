@@ -24,12 +24,12 @@ This API allows you to manage a list of tasks with the following features:
 
 ## Endpoints
 
+all except login and register endpoint are with auth check, auth by token `Authorization: Bearer %token%`
+
 - `POST /register` - create new user
 - `POST /login` - auth user
-  all other endpoint are with auth check, auth by token `Authorization: Bearer %token%`
 - `POST /logout` - logout user
 - `GET /user` - get info about current auth user
-
 - `GET /tasks` - Retrieve a list of tasks (top level only) with filters and sorting
 - `POST /tasks` - Create a new task
 - `GET /tasks/{id}` - Get specific task data with subtasks info
