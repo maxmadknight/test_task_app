@@ -22,7 +22,7 @@ use OpenApi\Annotations as OA;
  *     version="1.0.0"
  * )
  */
-class TaskResourceController extends Controller
+class TaskController extends Controller
 {
     protected $taskService;
 
