@@ -16,22 +16,26 @@ This API allows you to manage a list of tasks with the following features:
 
 1. Clone the repository
 2. Run `composer install`
-3. Set up your `.env` file
-4. Use `docker-compose up -d` to start the application
-5. Run `php artisan migrate --seed`
+3. Set up your `.env` (the docker data connection is already in the example file, so just `cp .env.example .env`, yes,
+   in a real project I did not act like that)
+4. Use `./vendor/bin/sail up -d` to start the application
+5. Run `./vendor/bin/sail artisan migrate --seed` or if you use regular docker
+   compose `docker-compose exec laravel.test sh` and run `php artisan migrate --seed`
 
 ## Endpoints
 
-- `GET /tasks` - Retrieve a list of tasks with filters and sorting
+- `POST /register` - create new user
+- `POST /login` - auth user
+  all other endpoint are with auth check, auth by token `Authorization: Bearer %token%`
+- `POST /logout` - logout user
+- `GET /user` - get info about current auth user
+
+- `GET /tasks` - Retrieve a list of tasks (top level only) with filters and sorting
 - `POST /tasks` - Create a new task
+- `GET /tasks/{id}` - Get specific task data with subtasks info
 - `PUT /tasks/{id}` - Update a task
-- `PATCH /tasks/{id}/complete` - Mark a task as complete
 - `DELETE /tasks/{id}` - Delete a task
-
-## Usage
-
-- Tasks can be filtered by status, priority, and searched by title and description.
-- Tasks can be sorted by `created_at`, `completed_at`, and `priority`.
+- `PATCH /tasks/{id}/complete` - Mark a task as complete
 
 ## License
 
