@@ -14,7 +14,6 @@ use App\Models\Task;
 use App\Services\TaskService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use OpenApi\Annotations as OA;
 
 /**
@@ -119,7 +118,7 @@ class TaskResourceController extends Controller
     {
         $filters = $request->only(['status', 'priority']);
         $sort = $request->input('sort');
-        $perPage = (int) $request->input('per_page', 15);
+        $perPage = (int)$request->input('per_page', 15);
 
         if ($request->has('search')) {
             $tasks = $this->taskService->searchTasks(

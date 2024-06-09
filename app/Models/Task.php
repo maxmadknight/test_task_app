@@ -76,6 +76,11 @@ class Task extends Model
         'user_id'
     ];
 
+    public static function createFromDTO(TaskDTO $taskDTO, int $userId): self
+    {
+        return static::create(array_merge($taskDTO->toArray(), ['user_id' => $userId]));
+    }
+
     public function subtasks(): HasMany
     {
         return $this->hasMany(Task::class, 'parent_id');
@@ -108,11 +113,6 @@ class Task extends Model
     public function searchableAs()
     {
         return 'tasks_index';
-    }
-
-    public static function createFromDTO(TaskDTO $taskDTO, int $userId): self
-    {
-        return static::create(array_merge($taskDTO->toArray(), ['user_id' => $userId]));
     }
 
 }

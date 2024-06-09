@@ -13,5 +13,7 @@ class TaskDTO extends Data
         public string|Optional $status,
         public int|Optional $priority,
         public ?int $parent_id
-    ) {}
+    )
+    {
+    }
 }

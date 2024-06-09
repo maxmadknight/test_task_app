@@ -10,16 +10,16 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use OpenApi\Annotations as OA;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
     /**
      * Register a new user.
      *
-     * @param  UserRegistrationRequest  $request
+     * @param UserRegistrationRequest $request
      * @return JsonResponse
      *
      * @OA\Post(
@@ -103,6 +103,28 @@ class AuthController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *     path="/api/user",
+     *     summary="Get authenticated user",
+     *     tags={"Auth"},
+     *     security={{"sanctum": {}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Authenticated user data",
+     *         @OA\JsonContent(ref="#/components/schemas/User")
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthenticated"
+     *     )
+     * )
+     */
+    public function user(Request $request)
+    {
+        return response()->json($request->user());
+    }
+
+    /**
      * @OA\Post(
      *     path="/api/logout",
      *     summary="Log out",
@@ -123,28 +145,6 @@ class AuthController extends Controller
         $request->user()->tokens()->delete();
 
         return response()->json(null, 204);
-    }
-
-    /**
-     * @OA\Get(
-     *     path="/api/user",
-     *     summary="Get authenticated user",
-     *     tags={"Auth"},
-     *     security={{"sanctum": {}}},
-     *     @OA\Response(
-     *         response=200,
-     *         description="Authenticated user data",
-     *         @OA\JsonContent(ref="#/components/schemas/User")
-     *     ),
-     *     @OA\Response(
-     *         response=401,
-     *         description="Unauthenticated"
-     *     )
-     * )
-     */
-    public function user(Request $request)
-    {
-        return response()->json($request->user());
     }
 }
 

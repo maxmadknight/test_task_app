@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Requests;
@@ -59,8 +60,8 @@ class CreateTaskRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'status' => 'required|string|in:'.implode(',', data_get(TaskStatus::cases(), '*.value')),
-            'priority' => 'required|integer|in:'.implode(',', data_get(TaskPriority::cases(), '*.value')),
+            'status' => 'required|string|in:' . implode(',', data_get(TaskStatus::cases(), '*.value')),
+            'priority' => 'required|integer|in:' . implode(',', data_get(TaskPriority::cases(), '*.value')),
             'parent_id' => 'nullable|exists:tasks,id',
         ];
     }

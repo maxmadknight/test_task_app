@@ -58,8 +58,8 @@ class UpdateTaskRequest extends FormRequest
         return [
             'title' => 'sometimes|required|string|max:255',
             'description' => 'nullable|string',
-            'priority' => 'sometimes|required|integer|in:'.implode(',', data_get(TaskPriority::cases(), '*.value')),
-            'status' => 'sometimes|required|string|in:'.implode(',', data_get(TaskStatus::cases(), '*.value')),
+            'priority' => 'sometimes|required|integer|in:' . implode(',', data_get(TaskPriority::cases(), '*.value')),
+            'status' => 'sometimes|required|string|in:' . implode(',', data_get(TaskStatus::cases(), '*.value')),
             'parent_id' => 'nullable|exists:tasks,id',
         ];
     }
